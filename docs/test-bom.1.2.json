@@ -1,0 +1,71 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.2",
+  "serialNumber": "urn:uuid:699b6458-60da-4f52-b1b3-34915dc01eb6",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2020-08-03T01:28:52.765Z",
+    "tools": [
+      {
+        "vendor": "CycloneDX",
+        "name": "Node.js module",
+        "version": "2.0.0"
+      }
+    ],
+    "component": {
+      "bom-ref": "7ea2c6c1-4e73-47d5-9a54-7dc674f2eee0",
+      "type": "application",
+      "name": "my application",
+      "version": "1.0",
+      "description": "A simple test app"      
+    }
+  },
+  "components": [
+     {
+      "type": "library",
+      "name": "helper-string-parser",
+      "version": "7.19.4",
+      "bom-ref": "372820f0-9672-4c33-9fe6-eedce4661290",
+      "author": "The Babel Team",
+      "description": "A utility package to parse strings",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40babel/helper-string-parser@7.19.4#packages/babel-helper-string-parser"      
+    },
+    {
+      "bom-ref": "79de26db-f891-486b-abb2-42da519756d7",
+      "type": "library",
+      "name": "busybox",
+      "version": "1.36.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:busybox:busybox:1.36.1:*:*:*:*:*:*:*"
+    },
+    {
+      "type": "library",
+      "bom-ref": "00aba59e-40c5-453d-9057-d73337d1d350",
+      "name": "bcpkix-fips",
+      "version": "1.0.6",
+      "licenses": [
+        {
+        "license": {
+        "name": "Bouncy Castle Licence",
+        "url": "http://www.bouncycastle.org/licence.html"
+      }
+      }
+    ],
+      "purl": "pkg:maven/org.bouncycastle/bcpkix-fips@1.0.6?type=jar",
+      "cpe":  "cpe:2.3:a:bouncycastle:bcpkix-fips:1.0.6:*:*:*:*:*:*:*"
+    }   
+  ]
+}
