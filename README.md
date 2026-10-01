@@ -31,16 +31,16 @@ dotnet ./src/PurlMaster/bin/Release/net9.0/purl-master.dll --help
 
 ## Run
 
-Convert a single file to `docs/test-bom.purl.json`:
+Convert a single file to `docs/test-bom.1.6.purl.json`:
 
 ```sh
-dotnet run --project src/PurlMaster -c Release -- docs/test-bom.json
+dotnet run --project src/PurlMaster -c Release -- docs/test-bom.1.6.json
 ```
 
 Specify an output file:
 
 ```sh
-dotnet run --project src/PurlMaster -c Release -- docs/test-bom.json --output ./output/test-bom.json
+dotnet run --project src/PurlMaster -c Release -- docs/test-bom.1.6.json --output ./output/test-bom.json
 ```
 
 Process the `.json` files directly inside a directory, writing to the sibling `./sboms.purl` directory:
@@ -103,6 +103,23 @@ dotnet ./artifacts/publish/purl-master.dll ./sboms --recursive --output ./enrich
 ```
 
 Publish also copies the seven schema files into `Schemas/`. Copy the entire publish directory to run elsewhere with the .NET 9 runtime installed. Processing holds one SBOM at a time in memory; usage scales with the largest file.
+
+## GitHub releases
+
+The [release workflow](.github/workflows/release.yml) restores locked dependencies, builds the Release configuration and runs the tests before packaging. It uses the .NET SDK specified in `global.json`. Push a version tag after committing the workflow to create a GitHub release:
+
+```sh
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+Supported tags have the form `vMAJOR.MINOR.PATCH`, optionally with a prerelease suffix such as `v1.0.0-rc.1`. Prerelease tags produce GitHub prereleases. The tag version is also embedded in the published application. Release creation uses the [GitHub CLI](https://cli.github.com/manual/gh_release_create) and the workflow's built-in token; no additional secrets are required.
+
+Each release contains a Windows x64 ZIP and Linux/macOS x64 and ARM64 tar archives, with SHA-256 checksums. Archives include the application dependencies, seven schemas, README and MIT license; an installed .NET 9 runtime is required. Linux archives target glibc-based distributions. Extract the entire archive and run `purl-master` (`purl-master.exe` on Windows), or use `dotnet purl-master.dll`.
+
+The release also includes `purl-master-<version>.cdx.json`, a CycloneDX 1.6 JSON SBOM with a SHA-256 checksum. The workflow uses the pinned [CycloneDX .NET generator](https://github.com/CycloneDX/cyclonedx-dotnet/tree/v5.5.0) to describe the application project's direct and transitive NuGet dependencies, excluding development dependencies. The SBOM records the release version and passes schema validation before upload. It covers application dependencies; the installed .NET runtime is supplied separately by the user.
+
+You can also run **Release** manually from the GitHub Actions tab to test and build downloadable artifacts, including the SBOM. Manual runs do not create a GitHub release. Rerunning a tag workflow updates the assets of an existing release.
 
 See [Requirements.md](docs/Requirements.md) for the complete behavior and acceptance criteria, and [Roadmap.md](docs/Roadmap.md) for implementation status and Codex handoff notes.
 

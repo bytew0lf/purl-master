@@ -12,6 +12,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <ProjectReference Include="../../src/PurlMaster/PurlMaster.csproj" />
-    <None Include="../../docs/test-bom.json" Link="Fixtures/test-bom.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../docs/test-bom.1.6.json" Link="Fixtures/test-bom.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

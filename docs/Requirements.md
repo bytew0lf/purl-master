@@ -105,7 +105,7 @@ purl-master --help
 
 ## Acceptance criteria
 
-1. Enriching `docs/test-bom.json` adds `pkg:generic/busybox/busybox@1.36.1?cpe_part=a` to BusyBox, preserves both existing PURLs and every other JSON value, and produces a schema-valid CycloneDX 1.6 document.
+1. Enriching `docs/test-bom.1.6.json` adds `pkg:generic/busybox/busybox@1.36.1?cpe_part=a` to BusyBox, preserves both existing PURLs and every other JSON value, and produces a schema-valid CycloneDX 1.6 document.
 2. Equivalent supported URI/formatted-string CPEs generate identical PURLs, including packed editions and escaped punctuation.
 3. A second enrichment leaves the output byte-for-byte unchanged.
 4. A recursive directory invocation mirrors eligible files into a separate output tree and processes valid files despite failures in other files.
